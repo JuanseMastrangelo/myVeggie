@@ -1,11 +1,14 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  ScannerDetails: undefined;
+  ScannerHistory: undefined;
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  Scanner: undefined;
+  Recetas: undefined;
+  Historial: undefined;
 };
 
 export type TabOneParamList = {
@@ -15,3 +18,12 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type TabTreeParamList = {
+  TabTreeScreen: undefined;
+};
+
+export type secondaryComponents = {
+  ScannerDetails: undefined;
+};
+

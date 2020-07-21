@@ -8,8 +8,18 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 
-// If you are not familiar with React Navigation, we recommend going through the
-// "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
+import ScannerDetails from '../components/ScannerDetails';
+import ScannerHistory from '../components/ScannerHistory';
+
+import * as firebase from 'firebase';
+import {firebaseConfig} from '../keys';
+
+// Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+
+
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -28,6 +38,8 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="ScannerDetails" component={ScannerDetails} />
+      <Stack.Screen name="ScannerHistory" component={ScannerHistory} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

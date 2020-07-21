@@ -7,7 +7,9 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import ScannerHistory from '../components/ScannerHistory';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabTreeParamList } from '../types';
+
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,20 +18,27 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Scanner"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
+        name="Scanner"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-barcode" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Recetas"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-pizza" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Historial"
+        component={TabTreeNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-ribbon" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -52,7 +61,11 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        options={{
+          headerTitle: '',
+          headerStatusBarHeight: -30,
+          cardOverlayEnabled: true,
+        }}
       />
     </TabOneStack.Navigator>
   );
@@ -66,8 +79,30 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        options={{
+          headerTitle: '',
+          headerStatusBarHeight: -30,
+          cardOverlayEnabled: true,
+        }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const TabTreeStack = createStackNavigator<TabTreeParamList>();
+
+function TabTreeNavigator() {
+  return (
+    <TabTreeStack.Navigator>
+      <TabTreeStack.Screen
+        name="TabTreeScreen"
+        component={ScannerHistory}
+        options={{
+          headerTitle: '',
+          headerStatusBarHeight: -30,
+          cardOverlayEnabled: true,
+        }}
+      />
+    </TabTreeStack.Navigator>
   );
 }
